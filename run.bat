@@ -13,17 +13,23 @@ if exist "..\.venv\Scripts\python.exe" (
     exit /b %errorlevel%
 )
 
+where py >nul 2>nul
+if %errorlevel% equ 0 (
+    py -3 "%MAIN%"
+    exit /b %errorlevel%
+)
+
 where python >nul 2>nul
 if %errorlevel% neq 0 (
     echo No se encontro Python en el sistema.
-    echo Instala Python 3.10+ o crea un entorno .venv en esta carpeta.
+    echo Instala Python 3.10+ o usa el lanzador py.
     exit /b 1
 )
 
 python --version >nul 2>nul
 if %errorlevel% neq 0 (
     echo Se detecto el alias de Python, pero no hay un interprete funcional instalado.
-    echo Instala Python 3.10+ o crea un entorno .venv en esta carpeta.
+    echo Instala Python 3.10+ o usa el lanzador py.
     exit /b 1
 )
 
